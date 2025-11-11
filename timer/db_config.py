@@ -23,11 +23,11 @@ HOST='db.example.com'
 DB_NAME='production_db'
 """
 config = {
-    'user': os.getenv('DB_LOGIN_AUCHAN'),
-    'password': os.getenv('DB_PASSWORD_AUCHAN'),
-    'host': os.getenv('DB_HOST_AUCHAN'),
-    'database': os.getenv('DB_NAME_AUCHAN'),
-    'port': os.getenv('DB_PORT_AUCHAN', 3306),
+    'user': os.getenv('DB_LOGIN_CITILINK'),
+    'password': os.getenv('DB_PASSWORD_CITILINK'),
+    'host': os.getenv('DB_HOST_CITILINK'),
+    'database': os.getenv('DB_NAME_CITILINK'),
+    'port': os.getenv('DB_PORT_CITILINK', 3306),
     'connection_timeout': 10,
     'read_timeout': 60,
     'use_pure': True
