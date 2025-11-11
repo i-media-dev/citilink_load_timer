@@ -253,8 +253,8 @@ async def measure_main_page_load_time(url: str, output_file: str, cursor=None):
         page_name = output_file.split('_')[1]
         status_code = response.status if response else 0
         screenshot = f'{ADDRESS}{output_file.split('_')[0]}/{png_file}'
-        # if 'citilink' in output_file:
-        #     send_bot_message(url, status_code, avg_time, screenshot)
+        if 'citilink' in output_file:
+            send_bot_message(url, status_code, avg_time, screenshot)
 
         if TABLE_NAME in tables_list:
             logging.info('Таблица %s найдена в базе', TABLE_NAME)

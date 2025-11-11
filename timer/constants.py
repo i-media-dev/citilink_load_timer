@@ -10,7 +10,7 @@ CRY_ROBOT = 'robot/cry-robot.png'
 WAIT_ROBOT = 'robot/wait-robot.png'
 """Стикер ждущего робота"""
 
-ALERT_ROBOT = 'robot/dead_bird-robot.png'
+ALERT_ROBOT = 'robot/phone_error-robot.png'
 """Стикер робота для общих уведомлений."""
 
 REDUCTION = 1000
@@ -62,10 +62,10 @@ SHOPS = {
     #     'https://www.rbt.ru/',
     #     'https://www.rbt.ru/basket/',
     # ),
-    'dns': (
-        'https://www.dns-shop.ru/',
-        'https://www.dns-shop.ru/cart/',
-    ),
+    # 'dns': (
+    #     'https://www.dns-shop.ru/',
+    #     'https://www.dns-shop.ru/cart/',
+    # ),
 }
 """Словарь всех сайтов с urls главной страницы и корзины."""
 
