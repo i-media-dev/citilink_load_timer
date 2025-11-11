@@ -124,7 +124,7 @@ async def measure_main_page_load_time(url: str, output_file: str, cursor=None):
         while attempt < REPEAT:
 
             browser = await p.chromium.launch(
-                headless=False,
+                headless=True,
                 args=[
                     "--no-sandbox",
                     "--disable-blink-features=AutomationControlled",
