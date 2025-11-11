@@ -20,7 +20,7 @@ from timer.logging_config import setup_logging
 
 setup_logging()
 
-auchan_bot = TeleBot(os.getenv('AUCHAN_TOKEN_TELEGRAM'))
+citilink_bot = TeleBot(os.getenv('CITILINK_TOKEN_TELEGRAM'))
 
 
 def send_bot_message(
@@ -38,8 +38,8 @@ def send_bot_message(
             try:
                 for id in CLIENT_IDS:
                     # with open(robot, 'rb') as photo:
-                    #     auchan_bot.send_sticker(id, photo)
-                    auchan_bot.send_message(
+                    #     citilink_bot.send_sticker(id, photo)
+                    citilink_bot.send_message(
                         chat_id=id,
                         text='Время ожидания ответа от сервера при загрузке '
                         f'страницы - {url} превысило критический '
@@ -53,8 +53,8 @@ def send_bot_message(
         try:
             for id in CLIENT_IDS:
                 with open(ALERT_ROBOT, 'rb') as photo:
-                    auchan_bot.send_sticker(id, photo)
-                auchan_bot.send_message(
+                    citilink_bot.send_sticker(id, photo)
+                citilink_bot.send_message(
                     chat_id=id,
                     text=f'При запросе на страницу - {url} сервер '
                     f'вернул код ответа: {status_code}. '
