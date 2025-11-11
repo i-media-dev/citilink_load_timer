@@ -8,5 +8,5 @@ services:
     env_file: .env
     volumes:
       - ./logs:/app/logs
-      - /home/main_ftp_user/scripts/citilinl_load_timer/media:/app/media
+      - /home/main_ftp_user/scripts/citilink_load_timer/media:/app/media
 
