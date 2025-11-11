@@ -6,7 +6,7 @@ import time
 from datetime import datetime as dt
 from pathlib import Path
 
-from fake_useragent import UserAgent
+# from fake_useragent import UserAgent
 from playwright.async_api import async_playwright
 from telebot import TeleBot
 
@@ -110,7 +110,7 @@ async def human_actions(page):
 
 @connection_db
 async def measure_main_page_load_time(url: str, output_file: str, cursor=None):
-    ua = UserAgent()
+    # ua = UserAgent()
     async with async_playwright() as p:
         attempt = 0
         repeat_times_list = []
@@ -124,7 +124,7 @@ async def measure_main_page_load_time(url: str, output_file: str, cursor=None):
         while attempt < REPEAT:
 
             browser = await p.chromium.launch(
-                headless=True,
+                headless=False,
                 args=[
                     "--no-sandbox",
                     "--disable-blink-features=AutomationControlled",
@@ -148,21 +148,24 @@ async def measure_main_page_load_time(url: str, output_file: str, cursor=None):
                 ]
             )
 
-            user_agent = ua.random
+            # user_agent = ua.random
+            user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'
 
             headers = {
-                "Accept": "text/html,application/xhtml+xml,application/"
-                "xml;q=0.9,image/webp,*/*;q=0.8",
-                "Accept-Language": "ru-RU,ru;q=0.9,en;q=0.8",
-                "Accept-Encoding": "gzip, deflate, br",
-                "Cache-Control": "no-cache",
-                "Connection": "keep-alive",
-                "DNT": "1",
-                "Upgrade-Insecure-Requests": "1",
-                "Sec-Fetch-Dest": "document",
-                "Sec-Fetch-Mode": "navigate",
-                "Sec-Fetch-Site": "none",
-                "Sec-Fetch-User": "?1",
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+                'cache-control': 'max-age=0',
+                'priority': 'u=0, i',
+                'referer': 'https://www.google.com/',
+                'sec-ch-ua': '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"',
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': '"Windows"',
+                'sec-fetch-dest': 'document',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-site': 'same-origin',
+                'sec-fetch-user': '?1',
+                'upgrade-insecure-requests': '1',
+                'user-agent': user_agent,
             }
 
             context = await browser.new_context(
@@ -175,6 +178,21 @@ async def measure_main_page_load_time(url: str, output_file: str, cursor=None):
 
             await context.set_extra_http_headers(headers)
             page = await context.new_page()
+            await page.add_init_script("""
+                delete Object.getPrototypeOf(navigator).webdriver;
+                Object.defineProperty(navigator, 'plugins', {
+                    get: () => [1, 2, 3, 4, 5],
+                });
+                Object.defineProperty(navigator, 'languages', {
+                    get: () => ['ru-RU', 'ru', 'en-US', 'en'],
+                });
+                Object.defineProperty(navigator, 'platform', {
+                    get: () => 'Win32',
+                });
+                Object.defineProperty(navigator, 'hardwareConcurrency', {
+                    get: () => 8,
+                });
+            """)
             await human_actions(page)
             logging.info('Начало загрузки страницы %s', output_file)
 
@@ -191,7 +209,9 @@ async def measure_main_page_load_time(url: str, output_file: str, cursor=None):
                     wait_until='load',
                     timeout=TIMEOUT_PAGE
                 )
+                # await asyncio.sleep(60)
                 load_time = round(time.perf_counter() - start_total, 2)
+                await human_actions(page)
                 logging.info('Загрузка  завершена: %s с', round(load_time, 2))
 
             except Exception as error:
@@ -233,8 +253,8 @@ async def measure_main_page_load_time(url: str, output_file: str, cursor=None):
         page_name = output_file.split('_')[1]
         status_code = response.status if response else 0
         screenshot = f'{ADDRESS}{output_file.split('_')[0]}/{png_file}'
-        if 'auchan' in output_file:
-            send_bot_message(url, status_code, avg_time, screenshot)
+        # if 'citilink' in output_file:
+        #     send_bot_message(url, status_code, avg_time, screenshot)
 
         if TABLE_NAME in tables_list:
             logging.info('Таблица %s найдена в базе', TABLE_NAME)

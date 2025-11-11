@@ -31,7 +31,7 @@ TIMEOUT_PAGE = 60000
 ADDRESS = 'https://feeds.i-media.ru/scripts/citilink_load_timer/media/'
 """Путь к файлу на ftp."""
 
-TABLE_NAME = 'auchan_loading_reports'
+TABLE_NAME = 'citilink_loading_reports'
 
 TIME_DELAY = 5
 """Время повторного реконнекта к дб в секундах."""
@@ -54,14 +54,14 @@ SHOPS = {
         'https://www.citilink.ru/',
         'https://www.citilink.ru/order/',
     ),
-    'technopark': (
-        'https://www.technopark.ru/',
-        'https://www.technopark.ru/cart/',
-    ),
-    'rbt': (
-        'https://www.rbt.ru/',
-        'https://www.rbt.ru/basket/',
-    ),
+    # 'technopark': (
+    #     'https://www.technopark.ru/',
+    #     'https://www.technopark.ru/cart/',
+    # ),
+    # 'rbt': (
+    #     'https://www.rbt.ru/',
+    #     'https://www.rbt.ru/basket/',
+    # ),
     'dns': (
         'https://www.dns-shop.ru/',
         'https://www.dns-shop.ru/cart/',
