@@ -1,12 +1,12 @@
 services:
-  auchan_load_timer:
+  citilink_load_timer:
     network_mode: "host"
     environment:
       - TZ=Europe/Moscow
-    image: imediadev/auchan_load_timer
+    image: imediadev/citilink_load_timer
     user: "1002:1002"
     env_file: .env
     volumes:
       - ./logs:/app/logs
-      - /home/main_ftp_user/scripts/auchan_load_timer/media:/app/media
+      - /home/main_ftp_user/scripts/citilinl_load_timer/media:/app/media
 
