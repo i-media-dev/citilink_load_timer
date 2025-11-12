@@ -14,7 +14,7 @@ from timer.constants import (ADDRESS, ALERT_ROBOT, CLIENT_IDS,
                              CREATE_REPORTS_MODEL, DATE_FORMAT, INSERT_REPORT,
                              LIMIT_FOR_ALLERT, REDUCTION, REPEAT, STATUS_CODES,
                              TABLE_NAME, TIME_FORMAT, TIMEOUT_PAGE,
-                             TIMEOUT_REQUESTS, TIMEOUT_SCREENSHOT)
+                             TIMEOUT_REQUESTS)
 from timer.decorators import connection_db
 from timer.logging_config import setup_logging
 
