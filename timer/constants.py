@@ -16,7 +16,7 @@ ALERT_ROBOT = 'robot/phone_error-robot.png'
 REDUCTION = 1000
 """Константа для перевода в секунды."""
 
-REPEAT = 1
+REPEAT = 3
 """Количество загрузок страницы."""
 
 TIMEOUT_REQUESTS = 5
@@ -69,7 +69,7 @@ SHOPS = {
 }
 """Словарь всех сайтов с urls главной страницы и корзины."""
 
-LIMIT_FOR_ALLERT = 2.0
+LIMIT_FOR_ALLERT = 3.0
 """Верхний предел ожидания ответа от сервера."""
 
 CLIENT_IDS = (os.getenv('GROUP_ID'),)

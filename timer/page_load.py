@@ -84,7 +84,7 @@ async def save_html(page, html_file_path):
             'навигацию не в тайминг: %s',
             error
         )
-        await page.wait_for_timeout(TIMEOUT_SCREENSHOT)
+        await page.wait_for_timeout(1000)
         html = await page.content()
 
     with open(html_file_path, 'w', encoding='utf-8') as f:
@@ -94,7 +94,7 @@ async def save_html(page, html_file_path):
 
 async def save_screenshot(page, png_file_path):
     """Функция для сохранения скриншота."""
-    await page.wait_for_timeout(TIMEOUT_SCREENSHOT)
+    # await page.wait_for_timeout(TIMEOUT_SCREENSHOT)
     await page.screenshot(path=png_file_path, full_page=True)
     logging.info('Скриншот сохранён → %s', png_file_path)
 
